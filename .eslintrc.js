@@ -25,6 +25,12 @@ module.exports = {
     quotes: 'warn', // 修改为警告
     'space-before-function-paren': 'off', // ⽅法名后增加空格
     semi: 'warn',
-    'comma-dangle': 'warn'
+    'comma-dangle': 'warn',
+    "vue/multi-word-component-names": [
+      "error",
+      {
+        ignores: ["index"], //需要忽略的组件名
+      },
+    ]
   }
 }
