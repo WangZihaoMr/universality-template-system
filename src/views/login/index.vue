@@ -53,7 +53,7 @@
 
 <script setup>
 import md5 from 'md5'
-import userApi from '@/api/user'
+import UserApi from '@/api/user'
 import { reactive, ref } from 'vue'
 import { validatePassWord } from './rules'
 import { Avatar, View, Hide } from '@element-plus/icons-vue'
@@ -93,7 +93,7 @@ const handleLoginSubmit = async () => {
     if (valid) {
       console.log('登录')
       loginForm.password = md5(loginForm.password)
-      const response = await userApi.login(loginForm)
+      const response = await UserApi.login(loginForm)
       console.log(response)
     }
   })

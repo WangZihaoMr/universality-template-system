@@ -2,25 +2,8 @@
 import axios from 'axios'
 // 导入md5进行加密
 import md5 from 'md5'
-
-// 引入loading加载组件
-import { ElLoading } from 'element-plus'
-
-const loading = {
-  loadingInstance: null,
-  // 开启loading加载
-  open() {
-    this.loadingInstance = ElLoading.service({
-      target: 'body',
-      text: 'Loading',
-      background: 'rgba(0, 0, 0, 0.4)'
-    })
-  },
-  close() {
-    this.loadingInstance.close()
-    this.loadingInstance = null
-  }
-}
+// 导入loading模块
+import loading from './loading'
 
 // 创建axios实例
 const service = axios.create({
@@ -31,6 +14,7 @@ const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(
   function (config) {
+    // 开启loading加载
     loading.open()
     const { icode, time } = getTestICode()
     config.headers.icode = icode
@@ -38,6 +22,7 @@ service.interceptors.request.use(
     return config
   },
   function (error) {
+    // 关闭loading加载
     loading.close()
     return Promise.reject(error)
   }
@@ -46,10 +31,12 @@ service.interceptors.request.use(
 // 添加响应拦截器
 service.interceptors.response.use(
   function (response) {
+    // 关闭loading加载
     loading.close()
     return response
   },
   function (error) {
+    // 关闭loading加载
     loading.close()
     return Promise.reject(error)
   }
