@@ -26,11 +26,11 @@ module.exports = {
     'space-before-function-paren': 'off', // ⽅法名后增加空格
     semi: 'warn',
     'comma-dangle': 'warn',
-    "vue/multi-word-component-names": [
-      "error",
+    'vue/multi-word-component-names': [
+      'warn',
       {
-        ignores: ["index"], //需要忽略的组件名
-      },
+        ignores: ['index', 'layout'] //需要忽略的组件名
+      }
     ]
   }
 }

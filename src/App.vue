@@ -3,5 +3,8 @@
 </template>
 
 <style lang="scss">
-@import '@/stylesheet/reset'
+#app{
+  width: 100%;
+  height: 100%;
+}
 </style>
