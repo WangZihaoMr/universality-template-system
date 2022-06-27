@@ -52,10 +52,11 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
-import { Avatar, View, Hide } from '@element-plus/icons-vue'
-import userApi from '@/api/user'
 import md5 from 'md5'
+import userApi from '@/api/user'
+import { reactive, ref } from 'vue'
+import { validatePassWord } from './rules'
+import { Avatar, View, Hide } from '@element-plus/icons-vue'
 
 // 数据源
 const loginForm = reactive({
@@ -65,14 +66,7 @@ const loginForm = reactive({
 // 表单DOM元素
 const LoginForm = ref()
 const passwordType = ref('password')
-// 密码的校验
-const validatePassWord = (rule, value, callback) => {
-  if (value.length < 6) {
-    callback(new Error('密码不能少于6位'))
-  } else {
-    callback()
-  }
-}
+
 // 数据规则校验
 const rules = {
   username: [
