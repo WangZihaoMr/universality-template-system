@@ -93,8 +93,8 @@ const handleLoginSubmit = async () => {
     if (valid) {
       console.log('登录')
       loginForm.password = md5(loginForm.password)
-      const response = await UserApi.login(loginForm)
-      console.log(response)
+      const res = await UserApi.login(loginForm)
+      console.log(res)
     }
   })
 }
