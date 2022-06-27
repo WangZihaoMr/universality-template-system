@@ -8,7 +8,7 @@ export default {
   actions: {
     async userLogin({ commit }, payload) {
       const response = await User.login(payload)
-      console.log(response)
+      // console.log(response)
       if (response) {
         commit('setToken', response)
       }

@@ -3,7 +3,11 @@
     <div class="loginFormBox">
       <div class="title-container">
         <h3 class="title">用户登录</h3>
-        <span class="icon">icon</span>
+        <chineseEnglish-Svg
+          class="iconfont icon-zhongyingwen"
+          style="font-size: 30px; color: white"
+        ></chineseEnglish-Svg>
+        <!-- <span class="iconfont icon-zhongyingwen"></span> -->
       </div>
       <el-form
         ref="LoginForm"
@@ -58,6 +62,7 @@ import { validatePassWord } from './rules'
 import { Avatar, View, Hide } from '@element-plus/icons-vue'
 import Utils from '@/utils/deepCopy'
 import { useStore } from 'vuex'
+import chineseEnglishSvg from '@/components/Icon'
 
 // 数据源
 const loginForm = reactive({
@@ -90,16 +95,14 @@ const rules = {
 // 登录校验
 const handleLoginSubmit = async () => {
   // 如果检验不成功则终止程序
-  // if (!LoginForm.value) return
+  if (!LoginForm.value) return
   // 成功则执行登录逻辑代码块
   await LoginForm.value.validate(async (valid) => {
     if (valid) {
-      console.log('登录')
       let newLoginForm = Utils.deepCopy(loginForm)
       newLoginForm.password = md5(newLoginForm.password)
-      // const res = await UserApi.login(newPassword)
-      store.dispatch('user/userLogin', newLoginForm)
-      // console.log(res)
+      const response = await store.dispatch('user/userLogin', newLoginForm)
+      if (!response) return
     }
   })
 }
@@ -122,6 +125,7 @@ const handleEyeStatus = () => {
 }
 .title-container {
   position: relative;
+  display: flex;
   .title {
     text-align: center;
     font-size: 26px;

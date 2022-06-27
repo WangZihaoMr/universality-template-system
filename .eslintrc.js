@@ -32,6 +32,18 @@ module.exports = {
         ignores: ['index', 'layout'] //需要忽略的组件名
       }
     ],
-    'prefer-const': 'off'
+    'prefer-const': 'off',
+    'no-dupe-keys': 'off',
+    eqeqeq: 'off',
+    'no-self-assign': 'off',
+    'no-sequences': 'off',
+    'no-unused-expressions': 'off',
+    'vue/multi-word-component-names': 'off',
+    'no-useless-return': 'off',
+    'no-use-before-define': 'off',
+    'no-void': 'off',
+    'no-var': 'off',
+    'no-use-before-define': 'off',
+    'no-void': 'off'
   }
 }

@@ -1,0 +1,30 @@
+{
+  "id": "3487118",
+  "name": "后台管理系统模板",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5388069",
+      "name": "眼睛_显示_o",
+      "font_class": "yanjing_xianshi_o",
+      "unicode": "ebcc",
+      "unicode_decimal": 60364
+    },
+    {
+      "icon_id": "5388071",
+      "name": "眼睛_隐藏_o",
+      "font_class": "yanjing_yincang_o",
+      "unicode": "ebcd",
+      "unicode_decimal": 60365
+    },
+    {
+      "icon_id": "7533292",
+      "name": "中英文",
+      "font_class": "zhongyingwen",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    }
+  ]
+}
