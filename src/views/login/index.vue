@@ -17,7 +17,7 @@
               <avatar />
             </el-icon>
           </span>
-          <el-input v-model="loginForm.username" placeholder="username" />
+          <el-input v-model.trim="loginForm.username" placeholder="username" />
         </el-form-item>
         <el-form-item prop="password">
           <span class="svg-container">
@@ -26,7 +26,7 @@
             </el-icon>
           </span>
           <el-input
-            v-model="loginForm.password"
+            v-model.trim="loginForm.password"
             :type="passwordType"
             placeholder="password"
           />
