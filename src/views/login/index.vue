@@ -53,17 +53,19 @@
 
 <script setup>
 import md5 from 'md5'
-import UserApi from '@/api/user'
 import { reactive, ref } from 'vue'
 import { validatePassWord } from './rules'
 import { Avatar, View, Hide } from '@element-plus/icons-vue'
 import Utils from '@/utils/deepCopy'
+import { useStore } from 'vuex'
 
 // 数据源
 const loginForm = reactive({
   username: 'super-admin',
   password: '123456'
 })
+// store实例
+const store = useStore()
 // 表单DOM元素
 const LoginForm = ref()
 const passwordType = ref('password')
@@ -93,10 +95,11 @@ const handleLoginSubmit = async () => {
   await LoginForm.value.validate(async (valid) => {
     if (valid) {
       console.log('登录')
-      let newPassword = Utils.deepCopy(loginForm)
-      newPassword.password = md5(newPassword.password)
-      const res = await UserApi.login(newPassword)
-      console.log(res)
+      let newLoginForm = Utils.deepCopy(loginForm)
+      newLoginForm.password = md5(newLoginForm.password)
+      // const res = await UserApi.login(newPassword)
+      store.dispatch('user/userLogin', newLoginForm)
+      // console.log(res)
     }
   })
 }
