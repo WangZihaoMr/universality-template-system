@@ -56,9 +56,9 @@ function getTestICode() {
 function request(options) {
   options.method = options.method || 'GET'
   if (options.method.toLocaleUpperCase()) {
-    options.params = options.data
+    options.params = options.data || {}
   }
-  service(options)
+  return service(options)
 }
 
 // 导出axios实例
