@@ -42,7 +42,7 @@
           <el-button
             type="primary"
             class="login-button"
-            @click="handleLoginSubmit(LoginForm)"
+            @click="handleLoginSubmit()"
             >登录</el-button
           >
         </el-form-item>
@@ -54,12 +54,18 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { Avatar, View, Hide } from '@element-plus/icons-vue'
+import userApi from '@/api/user'
+import md5 from 'md5'
+
 // 数据源
 const loginForm = reactive({
-  username: '',
-  password: ''
+  username: 'super-admin',
+  password: '123456'
 })
+// 表单DOM元素
+const LoginForm = ref()
 const passwordType = ref('password')
+// 密码的校验
 const validatePassWord = (rule, value, callback) => {
   if (value.length < 6) {
     callback(new Error('密码不能少于6位'))
@@ -85,14 +91,16 @@ const rules = {
   ]
 }
 // 登录校验
-const handleLoginSubmit = async (formName) => {
+const handleLoginSubmit = async () => {
   // 如果检验不成功则终止程序
-  if (!formName) return
+  // if (!LoginForm.value) return
   // 成功则执行登录逻辑代码块
-  await formName.validate((valid) => {
+  await LoginForm.value.validate(async (valid) => {
     if (valid) {
-      console.log(valid)
       console.log('登录')
+      loginForm.password = md5(loginForm.password)
+      const response = await userApi.login(loginForm)
+      console.log(response)
     }
   })
 }
@@ -165,7 +173,7 @@ const handleEyeStatus = () => {
 ::deep(.el-form-item) {
   background: rgba(0, 0, 0, 0.1) !important;
 }
-::deep(.el-input__inner) {
+:deep(.el-input__inner) {
   color: #eee !important;
 }
 </style>

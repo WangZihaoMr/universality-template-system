@@ -1,15 +1,19 @@
 // 导入axios
 import axios from 'axios'
-
+// 导入md5进行加密
+import md5 from 'md5'
 // 创建axios实例
 const service = axios.create({
-  baseURL: '',
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
 })
 
 // 添加请求拦截器
 service.interceptors.request.use(
   function (config) {
+    const { icode, time } = getTestICode()
+    config.headers.icode = icode
+    config.headers.codeType = time
     return config
   },
   function (error) {
@@ -27,5 +31,24 @@ service.interceptors.response.use(
   }
 )
 
+// 实现code
+function getTestICode() {
+  const now = parseInt(Date.now() / 1000)
+  const code = now + 'LGD_Sunday-1991'
+  return {
+    icode: md5(code),
+    time: now
+  }
+}
+
+// 统一传参方式
+function request(options) {
+  options.method = options.method || 'GET'
+  if (options.method.toLocaleUpperCase()) {
+    options.params = options.data
+  }
+  service(options)
+}
+
 // 导出axios实例
-export default service
+export default request
