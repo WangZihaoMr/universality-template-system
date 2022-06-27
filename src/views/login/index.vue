@@ -57,6 +57,7 @@ import UserApi from '@/api/user'
 import { reactive, ref } from 'vue'
 import { validatePassWord } from './rules'
 import { Avatar, View, Hide } from '@element-plus/icons-vue'
+import Utils from '@/utils/deepCopy'
 
 // 数据源
 const loginForm = reactive({
@@ -92,8 +93,9 @@ const handleLoginSubmit = async () => {
   await LoginForm.value.validate(async (valid) => {
     if (valid) {
       console.log('登录')
-      loginForm.password = md5(loginForm.password)
-      const res = await UserApi.login(loginForm)
+      let newPassword = Utils.deepCopy(loginForm)
+      newPassword.password = md5(newPassword.password)
+      const res = await UserApi.login(newPassword)
       console.log(res)
     }
   })

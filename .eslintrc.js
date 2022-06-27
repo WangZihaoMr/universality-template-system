@@ -31,6 +31,7 @@ module.exports = {
       {
         ignores: ['index', 'layout'] //需要忽略的组件名
       }
-    ]
+    ],
+    'prefer-const': 'off'
   }
 }
