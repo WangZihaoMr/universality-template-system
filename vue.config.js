@@ -17,7 +17,7 @@ module.exports = defineConfig({
     // 是否开启https协议
     https: false,
     // 是否自动打开浏览器
-    open: true,
+    // open: true,
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
         target: process.env.VUE_APP_SERVER_URL,
