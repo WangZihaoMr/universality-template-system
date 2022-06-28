@@ -105,6 +105,7 @@ const handleLoginSubmit = async () => {
       let newLoginForm = Utils.deepCopy(loginForm)
       newLoginForm.password = md5(newLoginForm.password)
       const response = await store.dispatch('user/userLogin', newLoginForm)
+      console.log(response)
       if (!response) return
     }
   })

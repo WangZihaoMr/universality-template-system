@@ -4,6 +4,8 @@ import axios from 'axios'
 import md5 from 'md5'
 // 导入loading模块
 import loading from './loading'
+// 导入弹框信息提示组件
+import { ElMessage } from 'element-plus'
 
 // 创建axios实例
 const service = axios.create({
@@ -33,11 +35,19 @@ service.interceptors.response.use(
   function (response) {
     // 关闭loading加载
     loading.close()
-    return response
+    // 全局数据的处理
+    const { data, success, message } = response.data
+    if (success) {
+      return data
+    } else {
+      ElMessage.error(message)
+      return Promise.reject(new Error(message))
+    }
   },
   function (error) {
     // 关闭loading加载
     loading.close()
+    ElMessage.error(error.message)
     return Promise.reject(error)
   }
 )
