@@ -2,11 +2,14 @@
   <div class="login-containner">
     <div class="loginFormBox">
       <div class="title-container">
+        <!-- <svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon> -->
+        <!-- <svg-icon icon="#icon-article"></svg-icon> -->
         <h3 class="title">用户登录</h3>
-        <chineseEnglish-Svg
+        <svg-icon className="svg-language" icon="language"></svg-icon>
+        <!-- <chineseEnglish-Svg
           class="iconfont icon-zhongyingwen"
           style="font-size: 30px; color: white"
-        ></chineseEnglish-Svg>
+        ></chineseEnglish-Svg> -->
         <!-- <span class="iconfont icon-zhongyingwen"></span> -->
       </div>
       <el-form
@@ -18,7 +21,7 @@
         <el-form-item prop="username">
           <span class="svg-container">
             <el-icon>
-              <avatar />
+              <svg-icon icon="user"></svg-icon>
             </el-icon>
           </span>
           <el-input v-model.trim="loginForm.username" placeholder="username" />
@@ -26,7 +29,7 @@
         <el-form-item prop="password">
           <span class="svg-container">
             <el-icon>
-              <avatar />
+              <svg-icon icon="password"></svg-icon>
             </el-icon>
           </span>
           <el-input
@@ -38,15 +41,16 @@
             class="svg-container svg-container-password"
             @click="handleEyeStatus"
           >
-            <el-icon v-if="passwordType === 'text'"><View /></el-icon>
-            <el-icon v-else><Hide /></el-icon>
+            <el-icon class="show-pwd">
+              <svg-icon :icon="passwordIconStatus"></svg-icon>
+            </el-icon>
           </span>
         </el-form-item>
         <el-form-item>
           <el-button
             type="primary"
             class="login-button"
-            @click="handleLoginSubmit()"
+            @click="handleLoginSubmit"
             >登录</el-button
           >
         </el-form-item>
@@ -57,12 +61,11 @@
 
 <script setup>
 import md5 from 'md5'
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
 import { validatePassWord } from './rules'
-import { Avatar, View, Hide } from '@element-plus/icons-vue'
 import Utils from '@/utils/deepCopy'
 import { useStore } from 'vuex'
-import chineseEnglishSvg from '@/components/Icon'
+import SvgIcon from '@/components/SvgIcon'
 
 // 数据源
 const loginForm = reactive({
@@ -110,6 +113,10 @@ const handleLoginSubmit = async () => {
 const handleEyeStatus = () => {
   passwordType.value = passwordType.value === 'password' ? 'text' : 'password'
 }
+// 密码框的icon
+const passwordIconStatus = computed(() => {
+  return passwordType.value === 'password' ? 'eye' : 'eye-open'
+})
 </script>
 
 <style scoped lang="scss">
@@ -134,10 +141,15 @@ const handleEyeStatus = () => {
     text-align: center;
     font-weight: 700;
   }
-  .icon {
+  ::v-deep .svg-language {
     position: absolute;
-    top: 0;
+    top: 4px;
     right: 0;
+    background-color: #fff;
+    font-size: 22px;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
   }
 }
 .svg-container-password {
