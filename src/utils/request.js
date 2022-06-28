@@ -35,22 +35,29 @@ service.interceptors.response.use(
   function (response) {
     // 关闭loading加载
     loading.close()
+    // token过期处理    无感知登录   无感知刷新
     // 全局数据的处理
     const { data, success, message } = response.data
     if (success) {
       return data
     } else {
-      ElMessage.error(message)
+      _showError(message)
       return Promise.reject(new Error(message))
     }
   },
   function (error) {
     // 关闭loading加载
     loading.close()
-    ElMessage.error(error.message)
+    _showError(error.message)
     return Promise.reject(error)
   }
 )
+
+// 响应提示信息
+const _showError = (message) => {
+  const errorInfo = message || '发生未知错误'
+  ElMessage.error(errorInfo)
+}
 
 // 实现code
 function getTestICode() {
