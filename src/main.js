@@ -12,6 +12,8 @@ import '@/iconfonts/iconfont.css'
 // 引入svg
 // import '@/icons/index'
 import installIcons from './icons/index.js'
+// 将页面鉴权挂载到全局
+import './permission'
 
 const app = createApp(App)
 installIcons(app)
