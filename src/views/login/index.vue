@@ -66,6 +66,7 @@ import { validatePassWord } from './rules'
 import Utils from '@/utils/deepCopy'
 import { useStore } from 'vuex'
 import SvgIcon from '@/components/SvgIcon'
+import { useRouter } from 'vue-router'
 
 // 数据源
 const loginForm = reactive({
@@ -74,6 +75,9 @@ const loginForm = reactive({
 })
 // store实例
 const store = useStore()
+// router实例
+const router = useRouter()
+
 // 表单DOM元素
 const LoginForm = ref()
 const passwordType = ref('password')
@@ -105,8 +109,8 @@ const handleLoginSubmit = async () => {
       let newLoginForm = Utils.deepCopy(loginForm)
       newLoginForm.password = md5(newLoginForm.password)
       const response = await store.dispatch('user/userLogin', newLoginForm)
-      console.log(response)
       if (!response) return
+      router.push('/')
     }
   })
 }

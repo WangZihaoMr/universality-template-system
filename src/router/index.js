@@ -8,9 +8,9 @@ const publicRoutes = [
     component: () => import('../views/login/index.vue')
   },
   {
-    path: '/Layout',
+    path: '/',
     name: 'layout',
-    component: () => import('../components/Layout.vue')
+    component: () => import('../layout')
   }
 ]
 
