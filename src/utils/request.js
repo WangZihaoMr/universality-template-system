@@ -10,7 +10,8 @@ import { ElMessage } from 'element-plus'
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000
+  timeout: 10000,
+  headers: { 'X-Custom-Header': 'foobar' }
 })
 
 // 添加请求拦截器
