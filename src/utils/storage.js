@@ -1,9 +1,9 @@
 // 存储数据到本地
-export const setItem = (value) => {
+export const setItem = (key, value) => {
   if (typeof value === 'object') {
     value = JSON.stringify(value)
   }
-  localStorage.setItem('token', value)
+  localStorage.setItem(key, value)
 }
 // 获取数据
 export const getItem = (key) => {

@@ -8,7 +8,7 @@ const loading = {
     if (this.loadingInstance === null) {
       this.loadingInstance = ElLoading.service({
         target: 'body',
-        text: '皇上，您别急...',
+        text: '拼命加载中...',
         background: 'rgba(0, 0, 0, 0.4)'
       })
     }

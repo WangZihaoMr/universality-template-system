@@ -6,6 +6,9 @@ import md5 from 'md5'
 import loading from './loading'
 // 导入弹框信息提示组件
 import { ElMessage } from 'element-plus'
+// 获取token
+import store from '../store'
+import router from '../router'
 
 // 创建axios实例
 const service = axios.create({
@@ -20,6 +23,8 @@ service.interceptors.request.use(
     // 开启loading加载
     loading.open()
     const { icode, time } = getTestICode()
+    const token = store.getters.token
+    config.headers.authorization = 'Bearer ' + token
     config.headers.icode = icode
     config.headers.codeType = time
     return config
@@ -49,6 +54,16 @@ service.interceptors.response.use(
   function (error) {
     // 关闭loading加载
     loading.close()
+    // 被动退出登录的两种情况
+    // 1、token失效：后端返回code === 1
+    if (
+      error.response &&
+      error.reponse.data &&
+      error.response.data.code === 401
+    ) {
+      store.dispatch('user/loginOut')
+      router.push('/login')
+    }
     _showError(error.message)
     return Promise.reject(error)
   }

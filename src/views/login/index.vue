@@ -108,8 +108,10 @@ const handleLoginSubmit = async () => {
     if (valid) {
       let newLoginForm = Utils.deepCopy(loginForm)
       newLoginForm.password = md5(newLoginForm.password)
-      const response = await store.dispatch('user/userLogin', newLoginForm)
-      if (!response) return
+      const userTokenData = await store.dispatch('user/userLogin', newLoginForm)
+      if (!userTokenData) return
+      const userInfoData = store.dispatch('user/userInfo')
+      if (!userInfoData) return
       router.push('/')
     }
   })
