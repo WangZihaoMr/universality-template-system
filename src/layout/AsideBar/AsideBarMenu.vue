@@ -28,7 +28,10 @@ import { reactive, computed } from 'vue'
 import AsideBarMenuItem from '../AsideBar/AsideBarMenuItem'
 import { filterMenusData } from '../../utils/menu'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { filterRoutes } from '../../utils/router'
 const store = useStore()
+const router = useRouter()
 
 // 数据来源有三种：写死的数据   2、模拟的数据   3、后台返回的数据
 // 1、定义递归组件所需要的数据
@@ -108,6 +111,13 @@ const data = reactive([
   }
 ])
 
+// 获取路由表的所有数据
+const getAllRoutes = router.getRoutes()
+// console.log(getAllRoutes)
+
+// 传递所有路由表的数据
+filterRoutes(getAllRoutes)
+
 // 获取用户头像信息
 const avatarUrl = computed(() => {
   return store.getters.userInfo.avatar
@@ -127,7 +137,7 @@ const menuList = reactive(filterMenusData(data))
   font-weight: 700;
   color: #fff;
 }
-.loginTxt{
+.loginTxt {
   padding-left: 8px;
 }
 ::v-deep .el-avatar {

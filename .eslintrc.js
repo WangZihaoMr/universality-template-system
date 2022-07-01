@@ -44,6 +44,7 @@ module.exports = {
     'no-void': 'off',
     'no-var': 'off',
     'no-use-before-define': 'off',
-    'no-void': 'off'
+    'no-void': 'off',
+    semi: 'off'
   }
 }

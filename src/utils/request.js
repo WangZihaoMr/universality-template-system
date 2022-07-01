@@ -9,6 +9,8 @@ import { ElMessage } from 'element-plus'
 // 获取token
 import store from '../store'
 import router from '../router'
+// 导入时效性
+import { isCheckTimeout } from '@/utils/auth'
 
 // 创建axios实例
 const service = axios.create({
@@ -27,6 +29,14 @@ service.interceptors.request.use(
     config.headers.authorization = 'Bearer ' + token
     config.headers.icode = icode
     config.headers.codeType = time
+    // 时效性：token过期，强制退出
+    if (token) {
+      console.log(isCheckTimeout())
+      if (isCheckTimeout()) {
+        store.dispatch('user/loginOut')
+        router.push('/login')
+      }
+    }
     return config
   },
   function (error) {
@@ -45,6 +55,7 @@ service.interceptors.response.use(
     // 全局数据的处理
     const { data, success, message } = response.data
     if (success) {
+      ElMessage.success(message)
       return data
     } else {
       _showError(message)

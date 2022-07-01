@@ -2,15 +2,8 @@
   <div class="login-containner">
     <div class="loginFormBox">
       <div class="title-container">
-        <!-- <svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon> -->
-        <!-- <svg-icon icon="#icon-article"></svg-icon> -->
         <h3 class="title">用户登录</h3>
         <svg-icon className="svg-language" icon="language"></svg-icon>
-        <!-- <chineseEnglish-Svg
-          class="iconfont icon-zhongyingwen"
-          style="font-size: 30px; color: white"
-        ></chineseEnglish-Svg> -->
-        <!-- <span class="iconfont icon-zhongyingwen"></span> -->
       </div>
       <el-form
         ref="LoginForm"
@@ -67,7 +60,9 @@ import Utils from '@/utils/deepCopy'
 import { useStore } from 'vuex'
 import SvgIcon from '@/components/SvgIcon'
 import { useRouter } from 'vue-router'
+import { setTimeStamp } from '../../utils/auth'
 
+setTimeStamp()
 // 数据源
 const loginForm = reactive({
   username: 'super-admin',
