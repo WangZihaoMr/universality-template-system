@@ -7,13 +7,13 @@ import { setItem, getItem } from '@/utils/storage'
 
 // 获取时间戳
 export function getTimeStamp() {
-  console.log(TIME_STAMP)
+  console.log('oldTime===>', TIME_STAMP)
   return getItem(TIME_STAMP)
 }
 
 // 设置时间戳
 export function setTimeStamp() {
-  console.log(Date.now())
+  console.log('失效时间===>', Date.now())
   setItem(TIME_STAMP, Date.now())
 }
 

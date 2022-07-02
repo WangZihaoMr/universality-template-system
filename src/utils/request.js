@@ -30,12 +30,21 @@ service.interceptors.request.use(
     config.headers.icode = icode
     config.headers.codeType = time
     // 时效性：token过期，强制退出
+    var timer
     if (token) {
+      timer = setInterval(function () {
+        if (isCheckTimeout()) {
+          // 清除定时器
+          clearInterval(timer)
+          store.dispatch('user/loginOut')
+          router.push('/login')
+        }
+      }, 1000)
       console.log(isCheckTimeout())
-      if (isCheckTimeout()) {
-        store.dispatch('user/loginOut')
-        router.push('/login')
-      }
+      // if (isCheckTimeout()) {
+      //   store.dispatch('user/loginOut')
+      //   router.push('/login')
+      // }
     }
     return config
   },

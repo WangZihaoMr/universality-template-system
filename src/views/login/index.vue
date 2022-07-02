@@ -62,6 +62,7 @@ import SvgIcon from '@/components/SvgIcon'
 import { useRouter } from 'vue-router'
 import { setTimeStamp } from '../../utils/auth'
 
+// token隔段时间失效，自动退出登录
 setTimeStamp()
 // 数据源
 const loginForm = reactive({
