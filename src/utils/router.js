@@ -5,7 +5,7 @@ const getChildChildren = (routes) => {
   // 接收所有的非一级子路由的数据
   routes.forEach((item) => {
     if (item.children && item.children.length > 0) {
-      allNotFirstRoutes.push(item)
+      allNotFirstRoutes.push(...item.children)
     }
   })
   console.log('所有的非一级子路由的数据===>', allNotFirstRoutes)
@@ -13,10 +13,10 @@ const getChildChildren = (routes) => {
 }
 
 // 与完整路由进行进行匹配
+// 14条
 export const filterRoutes = (routes) => {
   const childrenRoutes = getChildChildren(routes)
   return routes.filter((route) => {
-    // console.log(route)
     return !childrenRoutes.find((childrenRoute) => {
       return route.path === childrenRoute.path
     })

@@ -23,13 +23,13 @@
 </template>
 
 <script setup>
-import { reactive, computed } from 'vue'
+import { computed } from 'vue'
 // import SvgIcon from '../../components/SvgIcon'
 import AsideBarMenuItem from '../AsideBar/AsideBarMenuItem'
-import { filterMenusData } from '../../utils/menu'
+import { filterMenuData } from '../../utils/menu'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import { filterRoutes } from '../../utils/router'
+import { filterRoutes, generateMenus } from '../../utils/router'
 const store = useStore()
 const router = useRouter()
 
@@ -38,7 +38,7 @@ const router = useRouter()
 // 2、通过递归组件动态渲染菜单的数据
 // 3、获取到路由表的所有数据
 // 4、将路由表的数据过滤最终所需要的数据
-const data = reactive([
+/* const data = reactive([
   {
     path: '/profile',
     name: 'profile',
@@ -109,24 +109,23 @@ const data = reactive([
       }
     ]
   }
-])
-
-// 获取路由表的所有数据
-const getAllRoutes = router.getRoutes()
-// console.log(getAllRoutes)
-
-// 传递所有路由表的数据
-filterRoutes(getAllRoutes)
+]) */
 
 // 获取用户头像信息
 const avatarUrl = computed(() => {
   return store.getters.userInfo.avatar
 })
 
-const menuList = reactive(filterMenusData(data))
+const menuList = computed(() => {
+  const routes = filterRoutes(router.getRoutes())
+  return filterMenuData(generateMenus(routes))
+})
 </script>
 
 <style scoped lang="scss">
+.el-menu {
+  border-right: none;
+}
 .aside-title {
   width: 210px;
   height: 82px;

@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '../layout'
 
 // 公开路由表
-const publicRoutes = [
+export const publicRoutes = [
   {
     path: '/login',
     name: 'login',
@@ -17,12 +17,20 @@ const publicRoutes = [
       {
         path: '/profile',
         name: 'profile',
-        component: () => import('../views/profile')
+        component: () => import('../views/profile'),
+        meta: {
+          title: '个人中心',
+          icon: 'personnel'
+        }
       },
       {
         path: '/chart',
         name: 'chart',
-        component: () => import('../views/chart')
+        component: () => import('../views/chart'),
+        meta: {
+          title: '数据可视化',
+          icon: 'chart'
+        }
       },
       {
         path: '/404',
@@ -39,7 +47,7 @@ const publicRoutes = [
 ]
 
 // 私有路由表
-const privateRoutes = [
+export const privateRoutes = [
   {
     path: '/user',
     name: 'user',

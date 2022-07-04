@@ -1,6 +1,16 @@
 <template>
   <div class="header-wrapper">
-    <div class="header-left">王子豪</div>
+    <div class="hamburger-closed">
+      <svg-icon icon="hamburger-closed"></svg-icon>
+    </div>
+    <div class="header-left">
+      <!-- {{ $route.meta.title }} -->
+      <!-- {{ $route.matched }} -->
+      <!-- <span v-for="(item, index) in $route.matched" :key="index">
+        {{ item.meta.title }} /</span
+      > -->
+      <Breadcrumb></Breadcrumb>
+    </div>
     <div class="header-right">
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
@@ -24,6 +34,8 @@
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import Breadcrumb from '../components/Breadcrumb'
+
 const store = useStore()
 const router = useRouter()
 // 获取用户头像信息
@@ -42,6 +54,10 @@ const handleCommand = (command) => {
       break
   }
 }
+
+// console.log($route.path)
+// console.log($route)
+// consloe.log()
 // 主页
 const handleHome = () => {
   router.push('/')
@@ -60,10 +76,11 @@ const handleLoginOut = async () => {
 
 <style scoped lang="scss">
 .header-wrapper {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 16px 0 0;
   height: 50px;
   overflow: hidden;
   position: relative;
@@ -72,5 +89,24 @@ const handleLoginOut = async () => {
 }
 ::v-deep .el-avatar {
   background: #fff !important;
+}
+.hamburger-closed {
+  padding: 0 16px;
+  float: left;
+  line-height: 46px;
+  height: 100%;
+  cursor: pointer;
+  transition: background 0.5s;
+}
+.hamburger-closed:hover {
+  background: #e5e5e5;
+}
+.header-left {
+  float: left;
+}
+.header-right {
+  position: absolute;
+  top: 5px;
+  right: 16px;
 }
 </style>

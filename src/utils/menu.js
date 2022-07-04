@@ -10,7 +10,7 @@ const filtration = (menuData) => {
   return menuData
 }
 
-export const filterMenusData = (menu) => {
+export const filterMenuData = (menu) => {
   const menuList = filtration(menu)
   return menuList
 }
