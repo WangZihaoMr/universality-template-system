@@ -8,21 +8,21 @@ router.beforeEach(async (to, from, next) => {
   // 获取token
   const token = store.getters.token
   // 获取用户信息
-  const userInfoData = store.getters.userInfo
+  // const userInfoData = store.getters.userInfo
   if (token) {
     if (to.path === '/login') {
       next(from.path)
     } else {
-      if (userInfoData) {
-        next()
-      } else {
-        const response = store.dispatch('user/userInfo')
-        if (response) {
-          next()
-        } else {
-          next('/login')
-        }
-      }
+      // if (userInfoData) {
+      //   next()
+      // } else {
+      //   const response = store.dispatch('user/userInfo')
+      //   if (response) {
+      //     next()
+      //   } else {
+      //     next('/login')
+      //   }
+      // }
     }
   } else {
     if (whiteList.includes(to.path)) {

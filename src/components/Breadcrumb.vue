@@ -5,6 +5,7 @@
         <el-breadcrumb-item
           v-if="index !== breadcrumbData.length - 1"
           :to="{ path: item.path }"
+          class="cursorBread"
           >{{ item.meta.title }} /</el-breadcrumb-item
         >
         <el-breadcrumb-item v-else>{{ item.meta.title }}</el-breadcrumb-item>
