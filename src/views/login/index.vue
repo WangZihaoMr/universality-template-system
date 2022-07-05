@@ -62,8 +62,6 @@ import SvgIcon from '@/components/SvgIcon'
 import { useRouter } from 'vue-router'
 import { setTimeStamp } from '../../utils/auth'
 
-// token隔段时间失效，自动退出登录
-setTimeStamp()
 // 数据源
 const loginForm = reactive({
   username: 'super-admin',
@@ -105,10 +103,15 @@ const handleLoginSubmit = async () => {
       let newLoginForm = Utils.deepCopy(loginForm)
       newLoginForm.password = md5(newLoginForm.password)
       const userTokenData = await store.dispatch('user/userLogin', newLoginForm)
-      if (!userTokenData) return
-      const userInfoData = store.dispatch('user/userInfo')
-      if (!userInfoData) return
-      router.push('/')
+      if (userTokenData) {
+        // token隔段时间失效，自动退出登录
+        setTimeStamp()
+        router.push('/')
+      }
+
+      // if (!userTokenData) return
+      // const userInfoData = store.dispatch('user/userInfo')
+      // if (!userInfoData) return
     }
   })
 }
